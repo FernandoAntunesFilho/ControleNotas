@@ -1,3 +1,4 @@
+using ControleNotas.src.context;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);

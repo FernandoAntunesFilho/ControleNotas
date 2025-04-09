@@ -1,3 +1,4 @@
+using ControleNotas.src.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace ControleNotas.src.context
@@ -12,6 +13,10 @@ namespace ControleNotas.src.context
         {
             modelBuilder.Entity<Aluno>()
                 .HasKey(a => a.Id);
+
+            modelBuilder.Entity<Aluno>()
+                .HasIndex(a => a.Matricula)
+                .IsUnique();
         }
     }
 }
