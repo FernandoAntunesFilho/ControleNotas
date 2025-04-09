@@ -4,7 +4,7 @@ namespace ControleNotas.src.Domain.Interfaces
 {
     public interface IDisciplinaRepository
     {
-        Task<Disciplina> GetByIdAsync(int id);
+        Task<Disciplina?> GetByIdAsync(int id);
         Task<IEnumerable<Disciplina>> GetByNomeAsync(string nome);
         Task<IEnumerable<Disciplina>> GetAllAsync();
         Task AddAsync(Disciplina disciplina);
