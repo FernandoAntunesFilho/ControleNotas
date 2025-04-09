@@ -7,6 +7,8 @@ namespace ControleNotas.src.Models
         public int DisciplinaId { get; set; }
         public int Nota1 { get; set; }
         public int Nota2 { get; set; }
-        public int Status { get; set; }
+
+        public Aluno Aluno { get; set; } = null!;
+        public Disciplina Disciplina { get; set; } = null!;
     }
 }

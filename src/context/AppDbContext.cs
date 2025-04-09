@@ -20,6 +20,24 @@ namespace ControleNotas.src.context
             modelBuilder.Entity<Aluno>()
                 .HasIndex(a => a.Matricula)
                 .IsUnique();
+
+            modelBuilder.Entity<Professor>()
+                .HasOne(p => p.Disciplina)
+                .WithMany(d => d.Professores)
+                .HasForeignKey(p => p.DisciplinaId)
+                .OnDelete(DeleteBehavior.Restrict);
+        
+            modelBuilder.Entity<Nota>()
+                .HasOne(n => n.Aluno)
+                .WithMany(a => a.Notas)
+                .HasForeignKey(n => n.AlunoId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Nota>()
+                .HasOne(n => n.Disciplina)
+                .WithMany(d => d.Notas)
+                .HasForeignKey(n => n.DisciplinaId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }
