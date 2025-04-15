@@ -1,3 +1,4 @@
+using ControleNotas.src.DTOs.Aluno;
 using ControleNotas.src.Models;
 
 namespace ControleNotas.Domain.Interfaces
@@ -11,6 +12,6 @@ namespace ControleNotas.Domain.Interfaces
         Task<IEnumerable<Aluno>> GetAllAsync();
         Task AddAsync(Aluno aluno);
         Task UpdateAsync(Aluno aluno);
-        Task DeleteAsync(int id);
+        Task DeleteAsync(Aluno aluno);
     }
 }

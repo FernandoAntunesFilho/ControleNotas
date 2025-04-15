@@ -19,14 +19,10 @@ namespace ControleNotas.src.Repositories
             await _context.SaveChangesAsync();
         }
 
-        public async Task DeleteAsync(int id)
+        public async Task DeleteAsync(Aluno aluno)
         {
-            var aluno = await GetByIdAsync(id);
-            if (aluno != null)
-            {
-                _context.Alunos.Remove(aluno);
-                await _context.SaveChangesAsync();
-            }
+            _context.Alunos.Remove(aluno);
+            await _context.SaveChangesAsync();
         }
 
         public async Task<IEnumerable<Aluno>> GetAllAsync()
