@@ -1,3 +1,4 @@
+using ControleNotas.src.Domain.DTOs.Disciplina;
 using ControleNotas.src.Domain.Interfaces;
 using ControleNotas.src.Models;
 
@@ -11,22 +12,32 @@ namespace ControleNotas.src.Services
             _repository = repository;
         }
 
-        public async Task AddDisciplinaAsync(Disciplina disciplina)
+        public async Task AddDisciplinaAsync(DisciplinaRequestDTO disciplina)
         {
-            await _repository.AddAsync(disciplina);
+            if (disciplina is null ||
+                string.IsNullOrWhiteSpace(disciplina.Nome) ||
+                disciplina.CargaHoraria <= 0) throw new ArgumentNullException("Os dados da disciplina não podem ser nulos ou vazios.");
+
+            var novaDisciplina = new Disciplina
+            {
+                Nome = disciplina.Nome,
+                CargaHoraria = disciplina.CargaHoraria
+            };
+            
+            await _repository.AddAsync(novaDisciplina);
         }
 
         public async Task DeleteDisciplinaAsync(int id)
         {
             var disciplina = await _repository.GetByIdAsync(id);
-            if (disciplina == null) throw new KeyNotFoundException($"Disciplina com ID {id} não encontrado.");
+            if (disciplina == null) throw new KeyNotFoundException($"Disciplina com ID {id} não encontrada.");
             await _repository.DeleteAsync(id);
         }
 
-        public async Task UpdateDisciplinaAsync(Disciplina disciplina)
+        public async Task UpdateDisciplinaAsync(int id, DisciplinaRequestDTO disciplina)
         {
-            var existingDisciplina = await _repository.GetByIdAsync(disciplina.Id);
-            if (existingDisciplina == null) throw new KeyNotFoundException($"Disciplina com ID {disciplina.Id} não encontrado.");
+            var existingDisciplina = await _repository.GetByIdAsync(id);
+            if (existingDisciplina == null) throw new KeyNotFoundException($"Disciplina com ID {id} não encontrada.");
             existingDisciplina.Nome = disciplina.Nome;
             existingDisciplina.CargaHoraria = disciplina.CargaHoraria;
             await _repository.UpdateAsync(existingDisciplina);
@@ -40,7 +51,7 @@ namespace ControleNotas.src.Services
         public async Task<Disciplina> GetDisciplinaByIdAsync(int id)
         {
             var disciplina = await _repository.GetByIdAsync(id);
-            if (disciplina == null) throw new KeyNotFoundException($"Disciplina com ID {id} não encontrado.");
+            if (disciplina == null) throw new KeyNotFoundException($"Disciplina com ID {id} não encontrada.");
             return disciplina;
         }
 

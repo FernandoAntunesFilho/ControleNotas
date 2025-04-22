@@ -1,4 +1,4 @@
-namespace ControleNotas.src.DTOs.Aluno
+namespace ControleNotas.src.Domain.DTOs.Aluno
 {
     public class AlunoRequestDTO
     {

@@ -1,5 +1,6 @@
 using ControleNotas.Domain.Interfaces;
 using ControleNotas.src.context;
+using ControleNotas.src.Domain.Interfaces;
 using ControleNotas.src.Repositories;
 using ControleNotas.src.Services;
 using Microsoft.EntityFrameworkCore;
@@ -19,6 +20,8 @@ builder.Services.AddDbContext<AppDbContext>(options => options.UseMySql(connecti
 
 builder.Services.AddScoped<IAlunoRepository, AlunoRepository>();
 builder.Services.AddScoped<AlunoService>();
+builder.Services.AddScoped<IDisciplinaRepository, DisciplinaRepository>();
+builder.Services.AddScoped<DisciplinaService>();
 
 var app = builder.Build();
 

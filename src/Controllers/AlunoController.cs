@@ -1,4 +1,4 @@
-using ControleNotas.src.DTOs.Aluno;
+using ControleNotas.src.Domain.DTOs.Aluno;
 using ControleNotas.src.Services;
 using Microsoft.AspNetCore.Mvc;
 

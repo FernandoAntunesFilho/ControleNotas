@@ -1,4 +1,3 @@
-using ControleNotas.src.DTOs.Aluno;
 using ControleNotas.src.Models;
 
 namespace ControleNotas.Domain.Interfaces

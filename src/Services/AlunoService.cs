@@ -1,5 +1,5 @@
 using ControleNotas.Domain.Interfaces;
-using ControleNotas.src.DTOs.Aluno;
+using ControleNotas.src.Domain.DTOs.Aluno;
 using ControleNotas.src.Models;
 
 namespace ControleNotas.src.Services
