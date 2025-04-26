@@ -1,5 +1,4 @@
 using ControleNotas.src.Domain.DTOs.Nota;
-using ControleNotas.src.Models;
 using ControleNotas.src.Services;
 using Microsoft.AspNetCore.Mvc;
 
