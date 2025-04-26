@@ -1,4 +1,5 @@
-using ControleNotas.src.Domain.DTOs.Disciplina;
+using ControleNotas.src.Domain.DTOs.Nota;
+using ControleNotas.src.Models;
 using ControleNotas.src.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -6,21 +7,35 @@ namespace ControleNotas.src.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class DisciplinaController : ControllerBase
+    public class NotaController : ControllerBase
     {
-        private readonly DisciplinaService _disciplinaService;
-        public DisciplinaController(DisciplinaService disciplinaService)
+        private readonly NotaService _notaService;
+        public NotaController(NotaService notaService)
         {
-            _disciplinaService = disciplinaService;
+            _notaService = notaService;
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetDisciplinas()
+        public async Task<IActionResult> GetNotas()
         {
             try
             {
-                var disciplinas = await _disciplinaService.GetDisciplinasAsync();
-                return Ok(disciplinas);
+                var notas = await _notaService.GetNotasAsync();
+                return Ok(notas);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
+        }
+
+        [HttpGet("aluno/{alunoId}")]
+        public async Task<IActionResult> GetNotasByAlunoId(int alunoId)
+        {
+            try
+            {
+                var notas = await _notaService.GetNotasByAlunoAsync(alunoId);
+                return Ok(notas);
             }
             catch (Exception ex)
             {
@@ -29,26 +44,12 @@ namespace ControleNotas.src.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetDisciplina(int id)
+        public async Task<IActionResult> GetNota(int id)
         {
             try
             {
-                var disciplina = await _disciplinaService.GetDisciplinaByIdAsync(id);
-                return Ok(disciplina);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(new { message = ex.Message });
-            }
-        }
-
-        [HttpGet("nome/{nome}")]
-        public async Task<IActionResult> GetDisciplinasByNome(string nome)
-        {
-            try
-            {
-                var disciplinas = await _disciplinaService.GetDisciplinasByNomeAsync(nome);
-                return Ok(disciplinas);
+                var nota = await _notaService.GetNotaByIdAsync(id);
+                return Ok(nota);
             }
             catch (Exception ex)
             {
@@ -57,11 +58,11 @@ namespace ControleNotas.src.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddDisciplina([FromBody] DisciplinaRequestDTO request)
+        public async Task<IActionResult> AddNota([FromBody] NotaRequestDTO nota)
         {
             try
             {
-                await _disciplinaService.AddDisciplinaAsync(request);
+                await _notaService.AddNotaAsync(nota);
                 return Created();
             }
             catch (Exception ex)
@@ -71,11 +72,11 @@ namespace ControleNotas.src.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateDisciplina(int id, [FromBody] DisciplinaRequestDTO request)
+        public async Task<IActionResult> UpdateNota(int id, [FromBody] NotaRequestDTO nota)
         {
             try
             {
-                await _disciplinaService.UpdateDisciplinaAsync(id, request);
+                await _notaService.UpdateNotaAsync(id, nota);
                 return NoContent();
             }
             catch (Exception ex)
@@ -85,11 +86,11 @@ namespace ControleNotas.src.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteDisciplina(int id)
+        public async Task<IActionResult> DeleteNota(int id)
         {
             try
             {
-                await _disciplinaService.DeleteDisciplinaAsync(id);
+                await _notaService.DeleteNotaAsync(id);
                 return NoContent();
             }
             catch (Exception ex)

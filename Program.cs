@@ -22,6 +22,8 @@ builder.Services.AddScoped<IAlunoRepository, AlunoRepository>();
 builder.Services.AddScoped<AlunoService>();
 builder.Services.AddScoped<IDisciplinaRepository, DisciplinaRepository>();
 builder.Services.AddScoped<DisciplinaService>();
+builder.Services.AddScoped<INotaRepository, NotaRepository>();
+builder.Services.AddScoped<NotaService>();
 
 var app = builder.Build();
 
