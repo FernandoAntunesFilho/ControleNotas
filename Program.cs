@@ -19,7 +19,7 @@ builder.Services.AddDbContext<AppDbContext>(options => options.UseMySql(connecti
     new MySqlServerVersion(new Version(8, 0, 41))));
 
 builder.Services.AddScoped<IAlunoRepository, AlunoRepository>();
-builder.Services.AddScoped<AlunoService>();
+builder.Services.AddScoped<IAlunoService, AlunoService>();
 builder.Services.AddScoped<IDisciplinaRepository, DisciplinaRepository>();
 builder.Services.AddScoped<DisciplinaService>();
 builder.Services.AddScoped<INotaRepository, NotaRepository>();

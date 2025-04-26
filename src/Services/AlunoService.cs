@@ -1,10 +1,11 @@
 using ControleNotas.Domain.Interfaces;
 using ControleNotas.src.Domain.DTOs.Aluno;
+using ControleNotas.src.Domain.Interfaces;
 using ControleNotas.src.Models;
 
 namespace ControleNotas.src.Services
 {
-    public class AlunoService
+    public class AlunoService : IAlunoService
     {
         private readonly IAlunoRepository _repository;
         public AlunoService(IAlunoRepository repository)

@@ -1,4 +1,5 @@
 using ControleNotas.src.Domain.DTOs.Aluno;
+using ControleNotas.src.Domain.Interfaces;
 using ControleNotas.src.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,8 +9,8 @@ namespace ControleNotas.src.Controllers
     [Route("api/[controller]")]
     public class AlunoController : ControllerBase
     {
-        private readonly AlunoService _alunoService;
-        public AlunoController(AlunoService alunoService)
+        private readonly IAlunoService _alunoService;
+        public AlunoController(IAlunoService alunoService)
         {
             _alunoService = alunoService;
         }
