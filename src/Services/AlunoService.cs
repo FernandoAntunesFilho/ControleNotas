@@ -49,28 +49,30 @@ namespace ControleNotas.src.Services
             await _repository.UpdateAsync(existingAluno);
         }
 
-        public async Task<IEnumerable<Aluno>> GetAlunosAsync()
+        public async Task<IEnumerable<AlunoResponseDTO>> GetAlunosAsync()
         {
-            return await _repository.GetAllAsync();
+            var alunos = await _repository.GetAllAsync();
+            return MapAlunos(alunos);
         }
 
-        public async Task<Aluno> GetAlunoByIdAsync(int id)
+        public async Task<AlunoResponseDTO> GetAlunoByIdAsync(int id)
         {
             var aluno = await _repository.GetByIdAsync(id);
             if (aluno == null) throw new KeyNotFoundException($"Aluno com ID {id} não encontrado.");
-            return aluno;
+            return MapAluno(aluno);
         }
 
-        public async Task<Aluno> GetAlunoByMatriculaAsync(string matricula)
+        public async Task<AlunoResponseDTO> GetAlunoByMatriculaAsync(string matricula)
         {
             var aluno = await _repository.GetByMatriculaAsync(matricula);
             if (aluno == null) throw new KeyNotFoundException($"Aluno com matrícula {matricula} não encontrado.");
-            return aluno;
+            return MapAluno(aluno);
         }
 
-        public async Task<IEnumerable<Aluno>> GetAlunosByNomeAsync(string nome)
+        public async Task<IEnumerable<AlunoResponseDTO>> GetAlunosByNomeAsync(string nome)
         {
-            return await _repository.GetByNomeAsync(nome);
+            var alunos = await _repository.GetByNomeAsync(nome);
+            return MapAlunos(alunos);
         }
 
         private static bool ValidarAlunoDto(AlunoRequestDTO aluno)
@@ -80,6 +82,30 @@ namespace ControleNotas.src.Services
                             aluno.DataNascimento == DateTime.MinValue ||
                             string.IsNullOrWhiteSpace(aluno.Matricula) ||
                             string.IsNullOrWhiteSpace(aluno.Turma);
+        }
+
+        private static IEnumerable<AlunoResponseDTO> MapAlunos(IEnumerable<Aluno> alunos)
+        {
+            return alunos.Select(a => new AlunoResponseDTO
+            {
+                Id = a.Id,
+                Nome = a.Nome,
+                DataNascimento = a.DataNascimento,
+                Matricula = a.Matricula,
+                Turma = a.Turma
+            });
+        }
+
+        private static AlunoResponseDTO MapAluno(Aluno aluno)
+        {
+            return new AlunoResponseDTO
+            {
+                Id = aluno.Id,
+                Nome = aluno.Nome,
+                DataNascimento = aluno.DataNascimento,
+                Matricula = aluno.Matricula,
+                Turma = aluno.Turma
+            };
         }
     }
 }

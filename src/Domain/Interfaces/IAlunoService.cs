@@ -8,9 +8,9 @@ namespace ControleNotas.src.Domain.Interfaces
         Task AddAlunoAsync(AlunoRequestDTO aluno);
         Task DeleteAlunoAsync(int id);
         Task UpdateAlunoAsync(int id, AlunoRequestDTO aluno);
-        Task<IEnumerable<Aluno>> GetAlunosAsync();
-        Task<Aluno> GetAlunoByIdAsync(int id);
-        Task<Aluno> GetAlunoByMatriculaAsync(string matricula);
-        Task<IEnumerable<Aluno>> GetAlunosByNomeAsync(string nome);
+        Task<IEnumerable<AlunoResponseDTO>> GetAlunosAsync();
+        Task<AlunoResponseDTO> GetAlunoByIdAsync(int id);
+        Task<AlunoResponseDTO> GetAlunoByMatriculaAsync(string matricula);
+        Task<IEnumerable<AlunoResponseDTO>> GetAlunosByNomeAsync(string nome);
     }
 }
