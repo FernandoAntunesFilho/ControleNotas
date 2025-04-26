@@ -1,5 +1,5 @@
 using ControleNotas.src.Domain.DTOs.Disciplina;
-using ControleNotas.src.Services;
+using ControleNotas.src.Domain.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ControleNotas.src.Controllers
@@ -8,8 +8,8 @@ namespace ControleNotas.src.Controllers
     [Route("api/[controller]")]
     public class DisciplinaController : ControllerBase
     {
-        private readonly DisciplinaService _disciplinaService;
-        public DisciplinaController(DisciplinaService disciplinaService)
+        private readonly IDisciplinaService _disciplinaService;
+        public DisciplinaController(IDisciplinaService disciplinaService)
         {
             _disciplinaService = disciplinaService;
         }

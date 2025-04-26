@@ -4,7 +4,7 @@ using ControleNotas.src.Models;
 
 namespace ControleNotas.src.Services
 {
-    public class DisciplinaService
+    public class DisciplinaService : IDisciplinaService
     {
         private readonly IDisciplinaRepository _repository;
         public DisciplinaService(IDisciplinaRepository repository)

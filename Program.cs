@@ -21,7 +21,7 @@ builder.Services.AddDbContext<AppDbContext>(options => options.UseMySql(connecti
 builder.Services.AddScoped<IAlunoRepository, AlunoRepository>();
 builder.Services.AddScoped<IAlunoService, AlunoService>();
 builder.Services.AddScoped<IDisciplinaRepository, DisciplinaRepository>();
-builder.Services.AddScoped<DisciplinaService>();
+builder.Services.AddScoped<IDisciplinaService, DisciplinaService>();
 builder.Services.AddScoped<INotaRepository, NotaRepository>();
 builder.Services.AddScoped<NotaService>();
 builder.Services.AddScoped<IProfessorRepository, ProfessorRepository>();
