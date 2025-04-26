@@ -8,8 +8,8 @@ namespace ControleNotas.src.Domain.Interfaces
         Task AddDisciplinaAsync(DisciplinaRequestDTO disciplina);
         Task DeleteDisciplinaAsync(int id);
         Task UpdateDisciplinaAsync(int id, DisciplinaRequestDTO disciplina);
-        Task<IEnumerable<Disciplina>> GetDisciplinasAsync();
-        Task<Disciplina> GetDisciplinaByIdAsync(int id);
-        Task<IEnumerable<Disciplina>> GetDisciplinasByNomeAsync(string nome);
+        Task<IEnumerable<DisciplinaResponseDTO>> GetDisciplinasAsync();
+        Task<DisciplinaResponseDTO> GetDisciplinaByIdAsync(int id);
+        Task<IEnumerable<DisciplinaResponseDTO>> GetDisciplinasByNomeAsync(string nome);
     }
 }

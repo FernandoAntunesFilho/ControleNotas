@@ -43,21 +43,38 @@ namespace ControleNotas.src.Services
             await _repository.UpdateAsync(existingDisciplina);
         }
 
-        public async Task<IEnumerable<Disciplina>> GetDisciplinasAsync()
+        public async Task<IEnumerable<DisciplinaResponseDTO>> GetDisciplinasAsync()
         {
-            return await _repository.GetAllAsync();
+            var disciplinas = await _repository.GetAllAsync();
+            return MapDisciplinas(disciplinas);
         }
 
-        public async Task<Disciplina> GetDisciplinaByIdAsync(int id)
+        public async Task<DisciplinaResponseDTO> GetDisciplinaByIdAsync(int id)
         {
             var disciplina = await _repository.GetByIdAsync(id);
             if (disciplina == null) throw new KeyNotFoundException($"Disciplina com ID {id} não encontrada.");
-            return disciplina;
+            return new DisciplinaResponseDTO
+            {
+                Id = disciplina.Id,
+                Nome = disciplina.Nome,
+                CargaHoraria = disciplina.CargaHoraria
+            };
         }
 
-        public async Task<IEnumerable<Disciplina>> GetDisciplinasByNomeAsync(string nome)
+        public async Task<IEnumerable<DisciplinaResponseDTO>> GetDisciplinasByNomeAsync(string nome)
         {
-            return await _repository.GetByNomeAsync(nome);
+            var disciplinas = await _repository.GetByNomeAsync(nome);
+            return MapDisciplinas(disciplinas);
+        }
+
+        private static IEnumerable<DisciplinaResponseDTO> MapDisciplinas(IEnumerable<Disciplina> disciplinas)
+        {
+            return disciplinas.Select(d => new DisciplinaResponseDTO
+            {
+                Id = d.Id,
+                Nome = d.Nome,
+                CargaHoraria = d.CargaHoraria
+            });
         }
     }
 }
