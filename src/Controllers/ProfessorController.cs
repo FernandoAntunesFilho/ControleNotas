@@ -84,5 +84,33 @@ namespace ControleNotas.src.Controllers
                 return BadRequest(new { message = ex.Message });
             }
         }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateProfessor(int id, [FromBody] ProfessorRequestDTO professor)
+        {
+            try
+            {
+                await _professorService.UpdateProfessorAsync(id, professor);
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteProfessor(int id)
+        {
+            try
+            {
+                await _professorService.DeleteProfessorAsync(id);
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
+        }
     }
 }

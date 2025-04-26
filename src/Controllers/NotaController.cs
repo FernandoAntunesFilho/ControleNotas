@@ -1,6 +1,5 @@
 using ControleNotas.src.Domain.DTOs.Nota;
 using ControleNotas.src.Domain.Interfaces;
-using ControleNotas.src.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ControleNotas.src.Controllers

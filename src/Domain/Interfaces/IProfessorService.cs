@@ -7,7 +7,7 @@ namespace ControleNotas.src.Domain.Interfaces
     {
         Task AddProfessorAsync(ProfessorRequestDTO professor);
         Task DeleteProfessorAsync(int id);
-        Task UpdateProfessorAsync(Professor professor);
+        Task UpdateProfessorAsync(int id, ProfessorRequestDTO professor);
         Task<IEnumerable<ProfessorResponseDTO>> GetProfessoresAsync();
         Task<IEnumerable<ProfessorResponseDTO>> GetProfessoresByDisciplinaAsync(int disciplinaId);
         Task<ProfessorResponseDTO> GetProfessorByIdAsync(int id);

@@ -32,10 +32,11 @@ namespace ControleNotas.src.Services
             await _professorRepository.DeleteAsync(id);
         }
 
-        public async Task UpdateProfessorAsync(Professor professor)
+        public async Task UpdateProfessorAsync(int id, ProfessorRequestDTO professor)
         {
-            var existingProfessor = await _professorRepository.GetByIdAsync(professor.Id);
-            if (existingProfessor == null) throw new KeyNotFoundException($"Professor com ID {professor.Id} não encontrado.");
+            var existingProfessor = await _professorRepository.GetByIdAsync(id);
+            if (existingProfessor == null) throw new KeyNotFoundException($"Professor com ID {id} não encontrado.");
+
             existingProfessor.Nome = professor.Nome;
             existingProfessor.DisciplinaId = professor.DisciplinaId;
             await _professorRepository.UpdateAsync(existingProfessor);
