@@ -1,4 +1,5 @@
 using ControleNotas.src.Domain.DTOs.Nota;
+using ControleNotas.src.Domain.Interfaces;
 using ControleNotas.src.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,8 +9,8 @@ namespace ControleNotas.src.Controllers
     [Route("api/[controller]")]
     public class NotaController : ControllerBase
     {
-        private readonly NotaService _notaService;
-        public NotaController(NotaService notaService)
+        private readonly INotaService _notaService;
+        public NotaController(INotaService notaService)
         {
             _notaService = notaService;
         }

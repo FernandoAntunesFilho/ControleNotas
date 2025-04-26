@@ -5,7 +5,7 @@ using ControleNotas.src.Models;
 
 namespace ControleNotas.src.Services
 {
-    public class NotaService
+    public class NotaService : INotaService
     {
         private readonly INotaRepository _notaRepository;
         private readonly IAlunoRepository _alunoRepository;
@@ -17,7 +17,7 @@ namespace ControleNotas.src.Services
             _disciplinaRepository = disciplinaRepository;
         }
 
-        public async Task AddNotaAsync(NotaRequestDTO nota) //TODO: Testar POST.
+        public async Task AddNotaAsync(NotaRequestDTO nota)
         {
             Nota novaNota = new()
             {
