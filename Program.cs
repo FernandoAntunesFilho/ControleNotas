@@ -25,7 +25,7 @@ builder.Services.AddScoped<IDisciplinaService, DisciplinaService>();
 builder.Services.AddScoped<INotaRepository, NotaRepository>();
 builder.Services.AddScoped<INotaService, NotaService>();
 builder.Services.AddScoped<IProfessorRepository, ProfessorRepository>();
-builder.Services.AddScoped<ProfessorService>();
+builder.Services.AddScoped<IProfessorService, ProfessorService>();
 
 var app = builder.Build();
 

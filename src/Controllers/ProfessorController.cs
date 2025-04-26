@@ -1,4 +1,5 @@
 using ControleNotas.src.Domain.DTOs.Professor;
+using ControleNotas.src.Domain.Interfaces;
 using ControleNotas.src.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,8 +9,8 @@ namespace ControleNotas.src.Controllers
     [Route("api/[controller]")]
     public class ProfessorController : ControllerBase
     {
-        private readonly ProfessorService _professorService;
-        public ProfessorController(ProfessorService professorService)
+        private readonly IProfessorService _professorService;
+        public ProfessorController(IProfessorService professorService)
         {
             _professorService = professorService;
         }
