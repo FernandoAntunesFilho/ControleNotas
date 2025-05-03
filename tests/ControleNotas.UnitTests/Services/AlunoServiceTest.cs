@@ -33,7 +33,7 @@ namespace ControleNotas.UnitTests.Services
             _repositoryMock.Setup(r => r.AddAsync(It.IsAny<Aluno>()))
                 .Returns(Task.CompletedTask);
             var service = new AlunoService(_repositoryMock.Object);
-            var alunoInvalido = new AlunoRequestDTO(){
+            var Aluno = new AlunoRequestDTO(){
                 Nome = "Nome Aluno",
                 DataNascimento = DateTime.Now.AddYears(-10),
                 Matricula = "123456",
@@ -41,8 +41,42 @@ namespace ControleNotas.UnitTests.Services
             };
 
             // Act & Assert
-            await service.AddAlunoAsync(alunoInvalido);
+            await service.AddAlunoAsync(Aluno);
             _repositoryMock.Verify(r => r.AddAsync(It.IsAny<Aluno>()), Times.Once);
+        }
+
+        [Fact]
+        public async Task DeleteAlunoAsync_AlunoNaoExiste_DeveLancarKeyNotFoundException()
+        {
+            // Arrange
+            var service = new AlunoService(_repositoryMock.Object);
+            var alunoId = 1;
+            
+            // Act & Assert
+            await Assert.ThrowsAsync<KeyNotFoundException>(() => service.DeleteAlunoAsync(alunoId));
+        }
+
+        [Fact]
+        public async Task DeleteAlunoAsync_ComAlunoValido_DeveDeletarAluno()
+        {
+            // Arrange
+            var Aluno = new Aluno(){
+                Id = 1,
+                Nome = "Nome Aluno",
+                DataNascimento = DateTime.Now.AddYears(-10),
+                Matricula = "123456",
+                Turma = "Turma Aluno"
+            };
+            _repositoryMock.Setup(r => r.DeleteAsync(It.IsAny<Aluno>()))
+                .Returns(Task.CompletedTask);
+            _repositoryMock.Setup(r => r.GetByIdAsync(It.IsAny<int>()))
+                .ReturnsAsync(Aluno);
+            var service = new AlunoService(_repositoryMock.Object);
+            
+
+            // Act & Assert
+            await service.DeleteAlunoAsync(It.IsAny<int>());
+            _repositoryMock.Verify(r => r.DeleteAsync(It.IsAny<Aluno>()), Times.Once);
         }
     }
 }
