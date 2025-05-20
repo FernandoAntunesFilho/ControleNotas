@@ -172,6 +172,42 @@ namespace ControleNotas.UnitTests.Services
             _repositoryMock.Verify(r => r.UpdateAsync(It.IsAny<Aluno>()), Times.Once);
         }
 
+        [Fact]
+        public async Task GetAlunoByIdAsync_AlunoNaoExiste_DeveLancarKeyNotFoundException()
+        {
+            _repositoryMock.Setup(r => r.GetByIdAsync(It.IsAny<int>()))
+                .ReturnsAsync(null as Aluno);
+            var service = new AlunoService(_repositoryMock.Object);
+            var alunoId = 1;
+
+            // Act & Assert
+            await Assert.ThrowsAsync<KeyNotFoundException>(() => service.GetAlunoByIdAsync(alunoId));
+        }
+
+        [Fact]
+        public async Task GetAlunoByIdAsync_AlunoValido_DeveRetornarDTOCorretamente()
+        {
+            var alunoId = 1;
+            var aluno = _alunoBuilder
+                .ComId(alunoId)
+                .ComNome("Nome Aluno")
+                .ComDataNascimento(DateTime.Now.AddYears(-10))
+                .ComMatricula("123456")
+                .ComTurma("Turma Aluno")
+                .Build();
+            _repositoryMock.Setup(r => r.GetByIdAsync(It.IsAny<int>()))
+                .ReturnsAsync(aluno);
+            var service = new AlunoService(_repositoryMock.Object);
+
+            // Act & Assert
+            var response = await service.GetAlunoByIdAsync(alunoId);
+            Assert.Equal(response.Id, alunoId);
+            Assert.Equal(response.Nome, aluno.Nome);
+            Assert.Equal(response.DataNascimento.Date, aluno.DataNascimento.Date);
+            Assert.Equal(response.Matricula, aluno.Matricula);
+            Assert.Equal(response.Turma, aluno.Turma);
+        }
+
         public static IEnumerable<object[]> AlunoRequestDTOData =>
         new List<object[]>
         {
